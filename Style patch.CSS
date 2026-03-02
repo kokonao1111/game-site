@@ -1,0 +1,25 @@
+/* ============================================================
+   style-patch.css — adjustments after new header is added
+   Applied on top of style.css
+   ============================================================ */
+
+/* ── Remove old hero-top fixed positioning (no longer needed) ── */
+.hero-top {
+  display: none !important;
+}
+
+/* ── Hero section: remove the top gap that was reserved for hero-top ── */
+.hero {
+  padding-top: 20px;
+}
+
+/* ── story-topbar: remove old pink topbar (replaced by new header) ── */
+.story-topbar {
+  display: none !important;
+}
+
+/* ── corner-bg: now fixed to viewport. Since body has padding-top,
+   keep corners but nudge top one down ── */
+.corner-bg:not(.bottom-right) {
+  top: 0;
+}

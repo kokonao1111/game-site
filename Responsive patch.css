@@ -1,0 +1,436 @@
+/* ============================================================
+   responsive-patch.css
+   がぶがぶパニック — レスポンシブ強化パッチ
+   style-patch.css の後に読み込む
+   ============================================================ */
+
+/* ============================================================
+   § 0  TOKENS & FLUID SCALING
+   ============================================================ */
+:root {
+  /* clamp() で画面幅に応じて自動補間 */
+  --fs-hero:    clamp(32px, 10vw, 72px);
+  --fs-h3:      clamp(18px, 4.5vw, 30px);
+  --fs-body:    clamp(13px, 2vw, 15.5px);
+  --sp-inner:   clamp(14px, 4vw, 36px);
+  --sp-section-h: clamp(28px, 5vw, 56px);
+  --sp-section-v: clamp(32px, 6vw, 64px);
+  --sp-gap:       clamp(12px, 2.5vw, 22px);
+  --hero-art-h:   clamp(160px, 40vw, 340px);
+  --cloud-area-h: clamp(480px, 130vw, 700px);
+  --cloud-story-w:  clamp(140px, 42vw, 250px);
+  --cloud-others-w: clamp(150px, 45vw, 260px);
+  --r-md: clamp(12px, 3vw, 18px);
+  --r-lg: clamp(18px, 4vw, 28px);
+}
+
+/* ============================================================
+   § 1  BODY & SAFE-AREA
+   ============================================================ */
+body {
+  /* iOS notch + Android cutout 対応 */
+  padding-left:  env(safe-area-inset-left,  0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* ============================================================
+   § 2  PHONE COLUMN — フルレスポンシブ
+   ============================================================ */
+.phone {
+  width: 100%;
+  max-width: min(680px, 100vw);
+}
+
+/* ============================================================
+   § 3  SITE HEADER — 全幅追従
+   ============================================================ */
+.site-header {
+  left:  env(safe-area-inset-left,  0px);
+  right: env(safe-area-inset-right, 0px);
+}
+.site-header__inner {
+  max-width: none;           /* phone 幅に合わせず全幅 */
+  padding: 0 clamp(14px, 4vw, 32px);
+}
+.site-header__logo img {
+  height: clamp(38px, 8vw, 80px);
+}
+
+/* 超小画面：ロゴだけ残す */
+@media (max-width: 320px) {
+  .site-header__logo img { height: 34px; }
+  .hamburger { width: 38px; height: 38px; }
+}
+
+/* ============================================================
+   § 4  HERO
+   ============================================================ */
+.hero {
+  padding: clamp(16px, 4vw, 28px) var(--sp-inner) clamp(50px, 12vw, 70px);
+}
+.hero-art {
+  height: var(--hero-art-h);
+}
+
+/* 動画：アスペクト比を保ちながら引き伸ばし防止 */
+.hero-art video {
+  width:  100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--r-md);
+}
+
+/* 音ボタン：小画面でも押しやすいサイズ */
+.hero-audio-btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 14px);
+  font-size: clamp(11px, 2.5vw, 13px);
+  touch-action: manipulation;
+}
+
+/* ============================================================
+   § 5  CLOUD LINKS — 位置をvwで追従
+   ============================================================ */
+.cloud-links {
+  height: var(--cloud-area-h);
+  padding: 16px var(--sp-inner) clamp(80px, 20vw, 120px);
+}
+
+/* cloud 位置：絶対値 → vw 相対に */
+.cloud.story { left: clamp(10px, 4vw, 36px); top: clamp(14px, 4vw, 32px); }
+.cloud.idol  { right: clamp(10px, 4vw, 30px); top: clamp(74px, 20vw, 128px); }
+.cloud.game  { left: clamp(14px, 6vw, 44px); top: clamp(178px, 48vw, 260px); }
+.cloud.extra { right: clamp(10px, 4vw, 30px); top: clamp(268px, 72vw, 378px); }
+
+/* cloud サイズ */
+.cloud.story { width: var(--cloud-story-w); }
+.cloud.idol, .cloud.game, .cloud.extra { width: var(--cloud-others-w); }
+
+/* ============================================================
+   § 6  SECTION HEADERS
+   ============================================================ */
+.story-header h2 {
+  font-size: var(--fs-hero);
+  line-height: 1;
+}
+.story-header span {
+  font-size: clamp(16px, 4vw, 28px);
+}
+.story-header .sparkle-float {
+  width: clamp(16px, 4vw, 22px);
+}
+
+/* ============================================================
+   § 7  STORY SECTION
+   ============================================================ */
+.story-section {
+  padding: var(--sp-section-h) var(--sp-inner) var(--sp-section-v);
+}
+.story-body h3 { font-size: var(--fs-h3); }
+.story-body p  { font-size: var(--fs-body); }
+
+/* スマホ（639px以下）ではSTORY画像を非表示 */
+@media (max-width: 639px) {
+  .story-image {
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   § 7b  HERO VIDEO — スクロール時のかぶり修正
+   動画が下のクラウドエリアにはみ出してくる問題を修正
+   ============================================================ */
+
+/* 動画のparallaを完全に止める */
+.hero-art video {
+  transform: none !important;
+  will-change: auto;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* hero-art を確実にクリップ */
+.hero-art {
+  overflow: hidden;
+  position: relative;
+  /* z-index を下げてcloud-linksの下に潜らせる */
+  z-index: 0;
+}
+
+/* hero セクション全体の重なり順を下げる */
+.hero {
+  position: relative;
+  z-index: 1 !important;
+  /* スクロールしても動画が浮いてこないようにclipする */
+  overflow: hidden;
+}
+
+/* cloud-links は hero より確実に上 */
+.cloud-links {
+  position: relative;
+  z-index: 4;
+  /* cloud-links の背景で動画を隠す */
+  background: var(--col-white);
+}
+.cloud-links::before {
+  /* 既存の背景を確実に不透明に */
+  background: linear-gradient(180deg, var(--col-white) 0%, var(--col-pink-0) 100%);
+  opacity: 1;
+}
+
+/* ============================================================
+   § 8  GAME / HOW-TO SECTION
+   ============================================================ */
+.howto-section {
+  padding: var(--sp-section-h) var(--sp-inner) var(--sp-section-v);
+}
+
+.howto-list {
+  margin-top: clamp(12px, 3vw, 18px);
+  display: grid;
+  gap: var(--sp-gap);
+}
+
+.howto-item {
+  padding: clamp(12px, 3vw, 20px) clamp(14px, 3.5vw, 24px);
+  font-size: clamp(15px, 3.5vw, 22px);
+  border-radius: var(--r-md);
+  /* タッチしやすい最低高さ */
+  min-height: 56px;
+  touch-action: manipulation;
+}
+.howto-item img {
+  width: clamp(38px, 8vw, 52px);
+  flex-shrink: 0;
+}
+
+.howto-photo {
+  width: 100%;
+  max-width: clamp(280px, 80vw, 460px);
+  margin: clamp(8px, 2vw, 10px) auto clamp(4px, 1vw, 6px);
+  border-radius: var(--r-md);
+}
+
+/* 超小画面で写真のオフセット解除 */
+@media (max-width: 400px) {
+  .howto-photo { margin-left: 0; margin-right: 0; }
+}
+
+/* ============================================================
+   § 9  VENUE (BOOTH) SECTION
+   ============================================================ */
+.venue-section {
+  padding: var(--sp-section-h) var(--sp-inner) clamp(40px, 10vw, 52px);
+}
+.venue-photo {
+  width: 100%;
+  border-radius: var(--r-md);
+  box-shadow: 0 12px 32px rgba(212,0,122,0.18);
+}
+
+@media (min-width: 640px) {
+  .venue-body {
+    background: linear-gradient(135deg, var(--col-pink-0), var(--col-white));
+    border-radius: var(--r-lg);
+    padding: clamp(20px, 4vw, 36px) clamp(24px, 5vw, 40px);
+    border: 2px solid rgba(255,123,176,0.12);
+    box-shadow: 0 4px 14px rgba(212,0,122,0.12);
+  }
+}
+
+/* ============================================================
+   § 10  VOTE (FARM) SECTION
+   ============================================================ */
+.vote-section {
+  padding: var(--sp-section-h) var(--sp-inner) clamp(40px, 10vw, 56px);
+}
+.vote-qr {
+  width: clamp(160px, 55vw, 220px);
+}
+.vote-body p { font-size: var(--fs-body); }
+
+/* ============================================================
+   § 11  BOTTOM NAV
+   ============================================================ */
+.nav-bottom {
+  padding: clamp(8px, 2vw, 10px) clamp(6px, 2vw, 32px) 
+           max(clamp(12px, 3vw, 16px), env(safe-area-inset-bottom, 12px));
+}
+.nav-bottom a {
+  font-size: clamp(9px, 2vw, 13px);
+  padding: clamp(6px, 1.5vw, 10px) clamp(4px, 1vw, 8px);
+  min-width: 44px; /* タッチターゲット確保 */
+  touch-action: manipulation;
+}
+.nav-bottom span {
+  font-size: clamp(16px, 4vw, 26px);
+  line-height: 1;
+}
+
+/* ============================================================
+   § 12  FLOATING DECORATIONS
+   ============================================================ */
+.floating-notes {
+  right: clamp(0px, 1vw, 4px);
+}
+.cloud-links .note .main {
+  top: clamp(180px, 50vw, 238px);
+}
+.cloud-links .note .side2 {
+  top: clamp(225px, 60vw, 288px);
+}
+
+/* ============================================================
+   § 13  DESKTOP SIDEBAR
+   ============================================================ */
+/* サイドバー表示開始を 960px → 1024px に統一（phone が圧迫されないように） */
+.desktop-sidebar { display: none; }
+
+@media (min-width: 1024px) {
+  .desktop-sidebar { display: block; }
+}
+
+/* ============================================================
+   § 14  DRAWER MENU — タッチしやすく
+   ============================================================ */
+.mobile-menu__drawer {
+  width: min(300px, 88vw);
+  padding: clamp(70px, 12vw, 80px) clamp(18px, 5vw, 28px) clamp(30px, 6vw, 40px);
+}
+.drawer-link {
+  padding: clamp(12px, 3vw, 14px) clamp(14px, 4vw, 18px);
+  min-height: 52px; /* タッチターゲット */
+  font-size: clamp(14px, 3.5vw, 16px);
+  touch-action: manipulation;
+}
+.drawer-link__icon {
+  width: clamp(32px, 8vw, 40px);
+  height: clamp(32px, 8vw, 40px);
+}
+.drawer-logo img {
+  height: clamp(44px, 10vw, 56px);
+}
+
+/* ============================================================
+   § 15  LOADER — 小画面最適化
+   ============================================================ */
+.loader-egg {
+  width: clamp(56px, 15vw, 80px);
+}
+.loader-egg:nth-child(2) {
+  width: clamp(68px, 18vw, 98px);
+}
+.loader-text {
+  font-size: clamp(15px, 4vw, 20px);
+}
+.loader-eggs {
+  gap: clamp(10px, 3vw, 18px);
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+/* ============================================================
+   § 16  LANDSCAPE PHONE 強化
+   ============================================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+  :root {
+    --hero-art-h:   clamp(130px, 35vh, 180px);
+    --cloud-area-h: clamp(380px, 100vw, 500px);
+  }
+  .hero {
+    padding-top: 12px;
+    padding-bottom: 40px;
+  }
+  .hero-audio-btn {
+    bottom: -8px;
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+  .cloud.game  { top: clamp(150px, 36vw, 200px); }
+  .cloud.extra { top: clamp(240px, 58vw, 290px); }
+  .nav-bottom {
+    padding-bottom: max(6px, env(safe-area-inset-bottom, 6px));
+  }
+  .loader-eggs { gap: 10px; }
+  .loader-egg  { width: 52px; }
+}
+
+/* ============================================================
+   § 17  極小画面 (≤ 320px)
+   ============================================================ */
+@media (max-width: 320px) {
+  :root {
+    --fs-hero:        28px;
+    --sp-inner:       12px;
+    --cloud-story-w:  120px;
+    --cloud-others-w: 130px;
+  }
+  .cloud.story { left: 8px; top: 10px; }
+  .cloud.idol  { right: 8px; top: 60px; }
+  .cloud.game  { left: 10px; top: 155px; }
+  .cloud.extra { right: 8px; top: 235px; }
+  .howto-item span { font-size: 13px; }
+  .nav-bottom a    { font-size: 8px; }
+  .nav-bottom span { font-size: 14px; }
+  .site-header__logo img { height: 30px; }
+  .hamburger { width: 36px; height: 36px; }
+  .vote-qr { width: 140px; }
+}
+
+/* ============================================================
+   § 18  MEDIUM-LARGE (768px – 1023px) — タブレット縦
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .phone { max-width: 640px; }
+  .story-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .howto-photo { max-width: 400px; }
+}
+
+/* ============================================================
+   § 19  LARGE DESKTOP (≥ 1440px)
+   ============================================================ */
+@media (min-width: 1440px) {
+  .phone { max-width: 720px; }
+  .desktop-sidebar { width: 320px; }
+}
+
+/* ============================================================
+   § 20  PRINT
+   ============================================================ */
+@media print {
+  .site-header,
+  .mobile-menu,
+  .nav-bottom,
+  .loader,
+  .corner-bg,
+  .floating-notes,
+  .particle-canvas,
+  .desktop-sidebar { display: none !important; }
+  .phone { max-width: 100%; box-shadow: none; }
+  * { animation: none !important; transition: none !important; }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale {
+    opacity: 1 !important; transform: none !important;
+  }
+}
+
+/* ============================================================
+   § 21  REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal, .reveal-left, .reveal-right, .reveal-scale {
+    opacity: 1 !important; transform: none !important;
+  }
+}

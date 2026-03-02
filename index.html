@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>がぶがぶパニック公式</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="style.css?v=20260226-1" />
+    <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="style-patch.css" />
+    <link rel="stylesheet" href="desktop-sidebar.css" />
+  </head>
+  <body>
+
+    <!-- ローダー -->
+    <div class="loader" aria-hidden="true">
+      <div class="loader-sweep" aria-hidden="true"></div>
+      <div class="loader-inner">
+        <div class="loader-eggs" aria-hidden="true">
+          <img class="loader-egg" src="syasinn/卵１.png" alt="卵1" />
+          <img class="loader-egg" src="syasinn/卵２新.png" alt="卵2" />
+          <img class="loader-egg" src="syasinn/卵３ (2).png" alt="卵3" />
+          <img class="loader-egg" src="syasinn/卵４.png" alt="卵4" />
+        </div>
+        <p class="loader-text">Loading...</p>
+      </div>
+    </div>
+
+    <!-- ======= NEW PINK HEADER ======= -->
+    <header class="site-header" id="site-header">
+      <div class="site-header__inner">
+        <a class="site-header__logo" href="index.html" aria-label="Bright me up!! ホームへ">
+          <img src="syasinn/がぶがぶロゴ.png" alt="Bright me up!!" />
+        </a>
+        <nav class="site-header__nav" aria-label="メインナビ">
+          <a href="#story" class="hdr-link">STORY</a>
+          <a href="#howto" class="hdr-link">GAME</a>
+          <a href="#venue" class="hdr-link">BOOTH</a>
+          <a href="#vote" class="hdr-link">FARM</a>
+        </nav>
+        <button class="hamburger" id="hamburger-btn"
+          aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ======= MOBILE DRAWER MENU ======= -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="モバイルメニュー">
+      <div class="mobile-menu__backdrop" id="menu-backdrop"></div>
+      <nav class="mobile-menu__drawer" aria-label="モバイルナビ">
+        <span class="drawer-deco drawer-deco--tl" aria-hidden="true">
+          <img src="syasinn/ぷかぷかきらきら.png" alt="" />
+        </span>
+        <span class="drawer-deco drawer-deco--br" aria-hidden="true">
+          <img src="syasinn/ぷかぷかほし.png" alt="" />
+        </span>
+        <div class="drawer-logo">
+          <img src="syasinn/がぶがぶロゴ.png" alt="Bright me up!!" />
+        </div>
+        <ul class="drawer-nav" role="list">
+          <li><a href="#story" class="drawer-link" data-index="0">
+            <img src="syasinn/赤目.png" alt="" class="drawer-link__icon" /><span>STORY</span>
+          </a></li>
+          <li><a href="#howto" class="drawer-link" data-index="1">
+            <img src="syasinn/青目.png" alt="" class="drawer-link__icon" /><span>GAME</span>
+          </a></li>
+          <li><a href="#venue" class="drawer-link" data-index="2">
+            <img src="syasinn/黄色目.png" alt="" class="drawer-link__icon" /><span>BOOTH</span>
+          </a></li>
+          <li><a href="#vote" class="drawer-link" data-index="3">
+            <img src="syasinn/緑目.png" alt="" class="drawer-link__icon" /><span>FARM</span>
+          </a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- ======= DESKTOP LAYOUT WRAPPER ======= -->
+    <div class="desktop-wrap">
+
+      <!-- ===== LEFT SIDEBAR (PATTERN ONLY) ===== -->
+      <aside class="desktop-sidebar desktop-sidebar--left-panel" aria-hidden="true"></aside>
+
+      <!-- ===== PHONE COLUMN ===== -->
+      <div class="phone">
+
+        <div class="corner-bg"              aria-hidden="true"></div>
+        <div class="corner-bg bottom-right" aria-hidden="true"></div>
+
+        <!-- HERO -->
+        <section class="hero" id="top">
+          <div class="hero-card">
+            <div class="hero-art">
+              <span class="float-pair left">
+                <img class="big"   src="syasinn/ぷかぷかほし.png" alt="" />
+                <img class="small" src="syasinn/ぷかぷかはな.png" alt="" />
+              </span>
+              <span class="float-pair right">
+                <img class="big"   src="syasinn/ぷかぷかほし.png" alt="" />
+                <img class="small" src="syasinn/ぷかぷかほし.png" alt="" />
+              </span>
+              <video src="mov/GM42-014_PolyTone_がぶがぶパニック_完全版_圧縮版 (1).mp4"
+                autoplay muted loop playsinline aria-label="ライブ紹介ムービー"></video>
+              <button class="hero-audio-btn" id="hero-audio-btn" type="button" aria-pressed="false">
+                音を出す
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- CLOUD LINKS -->
+        <section class="cloud-links">
+          <span class="note">
+            <img class="main"  src="syasinn/ぷかぷかはな２.png" alt="" />
+            <img class="side2" src="syasinn/ぷかぷかきらきら.png" alt="" />
+          </span>
+          <img class="sparkle sparkle-1" src="syasinn/ぷかぷかほし.png" alt="" />
+          <img class="sparkle sparkle-2" src="syasinn/ぷかぷかほし.png" alt="" />
+          <img class="sparkle sparkle-3" src="syasinn/ぷかぷかきらきら.png" alt="" />
+          <a class="cloud story" href="#story">
+            <span class="cloud-swap">
+              <img class="cloud-img base" src="syasinn/赤目.png"         alt="STORY" />
+              <img class="cloud-img alt"  src="syasinn/赤目を閉じる.png" alt="" />
+            </span>
+          </a>
+          <a class="cloud idol" href="#howto">
+            <span class="cloud-swap">
+              <img class="cloud-img base" src="syasinn/青目.png"         alt="IDOL" />
+              <img class="cloud-img alt"  src="syasinn/青目を閉じる.png" alt="" />
+            </span>
+          </a>
+          <a class="cloud game" href="#venue">
+            <span class="cloud-swap">
+              <img class="cloud-img base" src="syasinn/黄色目.png"         alt="GAME" />
+              <img class="cloud-img alt"  src="syasinn/黄色目を閉じる.png" alt="" />
+            </span>
+          </a>
+          <a class="cloud extra" href="#vote">
+            <span class="cloud-swap">
+              <img class="cloud-img base" src="syasinn/緑目.png"         alt="EXTRA" />
+              <img class="cloud-img alt"  src="syasinn/緑目を閉じる.png" alt="" />
+            </span>
+          </a>
+        </section>
+
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <!-- STORY -->
+        <section class="story-section" id="story">
+          <div class="story-header reveal">
+            <h2>STORY</h2>
+            <span>あらすじ<img class="sparkle-float" src="syasinn/ぷかぷかきらきら.png" alt="" /></span>
+          </div>
+          <div class="story-image reveal-scale">
+            <img src="syasinn/緑目.png" alt="ストーリー画像" />
+          </div>
+          <div class="story-body reveal">
+            <h3>食べて！暴れて！生き残れ！！</h3>
+            <p>
+              とある日本の実験施設に保管されていた4つの卵…
+              長い時を経てついに産み落とされた怪獣たちは、おなかがペこぺこ！
+              目覚めた怪獣たちはあるのは食欲と生存本能のみ…
+              大怪獣バトルが、はじまる…
+            </p>
+          </div>
+        </section>
+
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <!-- GAME -->
+        <section class="howto-section" id="howto">
+          <span class="howto-float" aria-hidden="true">
+            <img class="main" src="syasinn/ぷかぷかきらきら.png" alt="" />
+            <img class="sub" src="syasinn/ぷかぷかはな.png" alt="" />
+          </span>
+          <div class="story-header reveal">
+            <h2>GAME</h2>
+            <span>遊び方<img class="sparkle-float" src="syasinn/ぷかぷかきらきら.png" alt="" /></span>
+          </div>
+          <div class="howto-list">
+            <div class="howto-item"><img src="syasinn/★１.png" alt="" /><span>４人対戦ゲーム</span></div>
+            <img class="howto-photo reveal-scale" src="syasinn/VS.png" alt="" />
+            <div class="howto-item"><img src="syasinn/★２.png" alt="" /><span>建物をがぶがぶ</span></div>
+            <img class="howto-photo reveal-scale" src="syasinn/三番目.png" alt="" />
+            <div class="howto-item"><img src="syasinn/★３.png" alt="" /><span>強くなって生き残れ！</span></div>
+            <img class="howto-photo reveal-scale" src="syasinn/新三番.png" alt="" />
+          </div>
+        </section>
+
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <!-- VENUE -->
+        <section class="venue-section" id="venue">
+          <span class="venue-float" aria-hidden="true">
+            <img class="main" src="syasinn/ぷかぷかほし.png" alt="" />
+            <img class="sub" src="syasinn/ぷかぷかはな２.png" alt="" />
+          </span>
+          <div class="story-header reveal">
+            <h2>Booth</h2>
+            <span>プレイ会場<img class="sparkle-float" src="syasinn/ぷかぷかきらきら.png" alt="" /></span>
+          </div>
+          <div class="venue-body reveal">
+            <img class="venue-photo" src="syasinn/ブース.png" alt="会場イメージ" />
+          </div>
+        </section>
+
+        <!-- フローティング装飾 -->
+        <span class="floating-notes" aria-hidden="true">
+          <img class="main"  src="syasinn/ぷかぷかほし.png"    alt="" />
+          <img class="side"  src="syasinn/ぷかぷかきらきら.png" alt="" />
+          <img class="side2" src="syasinn/ぷかぷかきらきら.png" alt="" />
+          <img class="side3" src="syasinn/ぷかぷかきらきら.png" alt="" />
+        </span>
+
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <!-- VOTE QR -->
+        <section class="vote-section" id="vote">
+          <div class="story-header reveal">
+            <h2>FORM</h2>
+            <span>FORM<img class="sparkle-float" src="syasinn/ぷかぷかきらきら.png" alt="" /></span>
+          </div>
+          <div class="vote-body reveal">
+            <p>投票はこちらから！</p>
+            <img class="vote-qr" src="syasinn/フォーム.png" alt="投票フォームの画像" />
+            <a class="vote-link" href="https://forms.office.com/r/v1bKtfqqM" target="_blank" rel="noopener">
+              フォームを開く
+            </a>
+            
+          </div>
+        </section>
+
+      </div><!-- /.phone -->
+
+      <!-- ===== RIGHT SIDEBAR (PATTERN ONLY) ===== -->
+      <aside class="desktop-sidebar" aria-hidden="true"></aside>
+
+    </div><!-- /.desktop-wrap -->
+
+    <script src="main.js?v=20260226-1"></script>
+    <script src="header.js"></script>
+
+  </body>
+</html>
+
